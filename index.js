@@ -8,7 +8,7 @@ const doAsync = (arrInput) => {
         if (typeof input === 'string') {
 			asyncOp(input);
 		} else {
-			input.map(asyncOp(input));
+			input.map( (mapInput) =>  { asyncOp(mapInput) });
 		}
 	});
 }

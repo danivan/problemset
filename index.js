@@ -25,9 +25,11 @@ class RandStringSource extends events.EventEmitter
 		let arrMatch = this.randStream.split('.');
 		arrMatch.shift();
 		arrMatch.pop();
-		arrMatch.map((data) => {
-			this.emit(data);
-		});
+		if(arrMatch.length > 0) {
+			arrMatch.map((data) => {
+				this.emit(data);
+			});
+		}
 	}
 }
 

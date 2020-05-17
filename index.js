@@ -34,20 +34,25 @@ class RandStringSource extends events.EventEmitter
 }
 
 // solution for problem 3
-class ResourceManager
+class ResourceManager extends events.EventEmitter
 {
 	constructor (count) {
-		this.maxResource = count;
 		this.count = count;
 	}
 
 	borrow (callback) {
+		const eventEmitter = this;
+		eventEmitter.on('addCount', () => {
+			this.count++;
+		});
+
 		let resource = {
 			release () {
-                this.count++;
-			}
+                eventEmitter.emit('addCount');
+			},
+			count: this.count
 		};
-		if (count > 0) {
+		if (this.count > 0) {
 		    this.count--;
 			callback(resource);
 		}	

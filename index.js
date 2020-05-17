@@ -22,10 +22,11 @@ class RandStringSource extends events.EventEmitter
 	}
 
 	emitDataEvent () {
-		let pattern = /\.(.*?)\./;
-		const arrMatch = pattern.exec(this.randStream);
-		if (arrMatch) {
-			this.emit('data', arrMatch[1]);
-		}
+		let arrMatch = this.randStream.split('.');
+		arrMatch.shift();
+		arrMatch.pop();
+		arrMatch.map((data) => {
+			this.emit(data);
+		});
 	}
 }
